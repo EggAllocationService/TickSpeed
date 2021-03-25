@@ -13,3 +13,11 @@ A bukkit plugin that allows admins to change the server tickrate.
 
 ##Contributing:
 Make a pull request! All ideas welcome.
+
+To build the plugin:
+
+```
+./gradlew clean build jar
+```
+
+Output is in `build/libs`
