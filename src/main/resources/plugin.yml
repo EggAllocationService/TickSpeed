@@ -1,6 +1,6 @@
 name: TickSpeed
 main: io.egg.tickspeed.TickSpeed
-version: 1.0.0
+version: 1.0.1
 author: EggAllocationService
 commands:
   tickspeed:
