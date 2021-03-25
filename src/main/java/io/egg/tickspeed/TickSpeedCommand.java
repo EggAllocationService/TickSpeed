@@ -1,7 +1,7 @@
 package io.egg.tickspeed;
 
-import de.themoep.minedown.MineDown;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,16 +12,16 @@ public class TickSpeedCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender.hasPermission("tickspeed.view") && args.length == 0) {
-            sender.spigot().sendMessage(MineDown.parse("&#2ab538&Current target tickrate is &#00c9db&" + (TickSpeed.targetTps == -1 ? "realtime" : TickSpeed.targetTps)));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aCurrent target tickrate is &b" + (TickSpeed.targetTps == -1 ? "realtime" : TickSpeed.targetTps)));
 
         } else if (sender.hasPermission("tickspeed.change") && args.length == 1) {
             // change tickspeed
             if (args[0].equalsIgnoreCase("realtime")) {
                 TickSpeed.targetTps = -1;
-                sender.spigot().sendMessage(MineDown.parse("&#2ab538&Changed target tickrate to &#00c9db&realtime"));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aChanged target tps to &brealtime"));
                 for (Player p : Bukkit.getOnlinePlayers()) {
                     if (p.hasPermission("tickspeed.notify") && p != sender) {
-                        sender.spigot().sendMessage(MineDown.parse("&#00c9db&" + sender.getName() + "&#2ab538&: changed target tickrate to realtime"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b" + sender.getName() + "&a: changed target tickrate to &brealtime"));
                     }
                 }
                 return true;
@@ -29,18 +29,18 @@ public class TickSpeedCommand implements CommandExecutor {
             try {
                 int h = Integer.parseInt(args[0]);
                 TickSpeed.targetTps = h;
-                sender.spigot().sendMessage(MineDown.parse("&#2ab538&Changed target tickrate to &#00c9db&" + h));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aChanged target tickrate to &b" + h));
                 for (Player p : Bukkit.getOnlinePlayers()) {
                     if (p.hasPermission("tickspeed.notify") && p != sender) {
-                        sender.spigot().sendMessage(MineDown.parse("&#00c9db&" + sender.getName() + "&#2ab538&: changed target tickrate to &#00c9db&" + h));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b" + sender.getName() + "&a: changed target tickrate to &b" + h));
                     }
                 }
             } catch(Exception e) {
-                sender.spigot().sendMessage(MineDown.parse("&#c92c2c&Unknown command, type /help for a list of commands"));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cUnknown command, type /help for a list of commands"));
             }
 
         } else {
-            sender.spigot().sendMessage(MineDown.parse("&#c92c2c&Unknown command, type /help for a list of commands"));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cUnknown command, type /help for a list of commands"));
         }
         return true;
     }
