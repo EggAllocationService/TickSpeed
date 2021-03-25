@@ -1,0 +1,8 @@
+name: TickSpeed
+main: io.egg.tickspeed.TickSpeed
+version: 1.0.0
+author: EggAllocationService
+commands:
+  tickspeed:
+    description: Change or view the server tickspeed
+    usage: /tickspeed [realtime|<tps>]
