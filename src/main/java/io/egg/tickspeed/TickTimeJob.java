@@ -1,6 +1,5 @@
 package io.egg.tickspeed;
 
-
 import org.bukkit.Bukkit;
 
 import java.lang.reflect.Field;
@@ -18,9 +17,9 @@ public class TickTimeJob implements Runnable {
         try {
             utils = getNmsClass("SystemUtils");
             getMillis = utils.getDeclaredMethod("getMonotonicMillis");
-            server = getNmsClass("MinecraftServer");
+            server = getNmsClass("server.MinecraftServer");
             getServer = server.getMethod("getServer");
-            f = server.getDeclaredField("nextTick");
+            f = server.getDeclaredField("ao");
         } catch (ClassNotFoundException | NoSuchMethodException | NoSuchFieldException e) {
             e.printStackTrace();
         }
@@ -58,7 +57,7 @@ public class TickTimeJob implements Runnable {
         String packageVersion = array.length == 4 ? array[3] + "." : "";
 
         // construct the qualified class name from the obtained package version
-        String qualName = "net.minecraft.server." + packageVersion + name;
+        String qualName = "net.minecraft." + name;
 
         // simple call to get the Class object
         return Class.forName(qualName);
