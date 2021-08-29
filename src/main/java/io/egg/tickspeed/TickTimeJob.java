@@ -50,12 +50,6 @@ public class TickTimeJob implements Runnable {
         }
     }
     public Class<?> getNmsClass(String name) throws ClassNotFoundException {
-        // explode the Server interface implementation's package name into its components
-        String[] array = Bukkit.getServer().getClass().getPackage().getName().split("\\.");
-
-        // pick out the component representing the package version if it's present
-        String packageVersion = array.length == 4 ? array[3] + "." : "";
-
         // construct the qualified class name from the obtained package version
         String qualName = "net.minecraft." + name;
 
